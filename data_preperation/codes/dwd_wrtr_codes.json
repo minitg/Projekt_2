@@ -1,0 +1,10 @@
+{
+    "0": "No precipitation",
+    "1": "precipitation only (in historical Data before 01.01.1979)",
+    "4": "Type of precipitation unascertainable and depositional precipitation, automatically ascertainment",
+    "6": "Liquid precipitation, automatically ascertainment",
+    "7": "Solid precipitation, automatically ascertainment",
+    "8": "Liquid and solid precipitation, automatically ascertainment",
+    "9": "Missing value, Type of precipitation unascertainable, automatically ascertainment",
+    "-999": "missing value"
+}
