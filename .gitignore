@@ -1,0 +1,18 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+
+# Raw DWD downloads can be large.
+XAI_Wetter/
+XAI_Wetter.zip
+
+# Training artifacts.
+outputs/
+*.pt
+*.pth
+
+# Notebook/cache files.
+.ipynb_checkpoints/
+.matplotlib_cache/
+notebooks/.matplotlib_cache/
