@@ -12,7 +12,7 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader
 
-from models import PaperLSTM
+from models import WeatherLSTM
 from weather_dataloader import (
     DEFAULT_LOG_COLUMNS,
     DEFAULT_ROLLING_COLUMNS,
@@ -25,8 +25,8 @@ from weather_dataloader import (
 @dataclass
 class Config:
     data_path: str = "data/processed/weather_clean_daily.csv"
-    output_dir: str = "outputs/rnn_weather_paper_lstm"
-    model: str = "paper_lstm"
+    output_dir: str = "outputs/weather_lstm"
+    model: str = "weather_lstm"
     target: str = "TT_TU"
     sequence_length: int = 48
     horizon: int = 1
@@ -48,8 +48,8 @@ class Config:
     log_columns: tuple[str, ...] = tuple(DEFAULT_LOG_COLUMNS)
 
 
-PAPER_LSTM_DEFAULTS = {
-    "model": "paper_lstm",
+WEATHER_LSTM_DEFAULTS = {
+    "model": "weather_lstm",
     "sequence_length": 48,
     "hidden_size": 64,
     "num_layers": 1,
@@ -78,13 +78,13 @@ def pick_device(preferred: str = "auto") -> torch.device:
 
 
 def make_model(cfg: Config, n_features: int) -> nn.Module:
-    if cfg.model == "paper_lstm":
-        return PaperLSTM(
+    if cfg.model == "weather_lstm":
+        return WeatherLSTM(
             n_features=n_features,
             hidden_size=cfg.hidden_size,
             dropout=cfg.dropout,
         )
-    raise ValueError("Unknown model. Use 'paper_lstm'.")
+    raise ValueError("Unknown model. Use 'weather_lstm'.")
 
 
 def rmse(pred: np.ndarray, actual: np.ndarray) -> float:
@@ -291,7 +291,7 @@ def parse_args() -> Config:
     parser = argparse.ArgumentParser(description="Train an LSTM on daily weather data.")
     parser.add_argument("--data-path", default=None)
     parser.add_argument("--output-dir", default=None)
-    parser.add_argument("--model", choices=["paper_lstm"], default=Config.model)
+    parser.add_argument("--model", choices=["weather_lstm"], default=Config.model)
     parser.add_argument("--target", default=None)
     parser.add_argument("--sequence-length", type=int, default=None)
     parser.add_argument("--horizon", type=int, default=None)
@@ -315,10 +315,10 @@ def parse_args() -> Config:
 
     args = vars(parser.parse_args())
     cfg = Config(model=args.pop("model"))
-    if cfg.model == "paper_lstm":
-        for key, value in PAPER_LSTM_DEFAULTS.items():
+    if cfg.model == "weather_lstm":
+        for key, value in WEATHER_LSTM_DEFAULTS.items():
             setattr(cfg, key, value)
-        cfg.output_dir = "outputs/rnn_weather_paper_lstm"
+        cfg.output_dir = "outputs/weather_lstm"
 
     for key, value in args.items():
         if key == "no_engineered_features":

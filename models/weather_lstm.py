@@ -4,8 +4,8 @@ import torch
 from torch import nn
 
 
-class PaperLSTM(nn.Module):
-    """LSTM architecture following the hyperparameter table from the paper."""
+class WeatherLSTM(nn.Module):
+    """LSTM architecture for daily weather time-series forecasting."""
 
     def __init__(
         self,

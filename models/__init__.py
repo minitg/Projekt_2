@@ -1,3 +1,3 @@
-from .paper_lstm import PaperLSTM
+from .weather_lstm import WeatherLSTM
 
-__all__ = ["PaperLSTM"]
+__all__ = ["WeatherLSTM"]

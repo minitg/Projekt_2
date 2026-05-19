@@ -3,7 +3,7 @@
 This repository contains a compact PyTorch pipeline for forecasting the next
 day's mean temperature from DWD weather time series.
 
-The final model is a Paper-LSTM style architecture trained on daily weather data
+The final model is a WeatherLSTM architecture trained on daily weather data
 from DWD station `04104` Regensburg.
 
 ## Structure
@@ -14,7 +14,7 @@ data/
     weather_clean_daily.csv
     weather_clean_hourly.csv
 models/
-  paper_lstm.py
+  weather_lstm.py
 notebooks/
   lstm_training.ipynb
 build_weather_dataset.py
@@ -47,7 +47,7 @@ day_cos   Cosine encoding of day-of-year seasonality
 ```
 
 Optional rolling/log feature engineering is implemented but disabled by default,
-because it did not improve the final Paper-LSTM in the current experiments.
+because it did not improve the final WeatherLSTM in the current experiments.
 
 ## Setup
 
@@ -76,7 +76,7 @@ python train_weather_rnn.py
 Default training setup:
 
 ```text
-model: paper_lstm
+model: weather_lstm
 target: TT_TU
 sequence_length: 48
 horizon: 1
@@ -91,7 +91,7 @@ device: auto (uses Apple MPS if available, otherwise CUDA, otherwise CPU)
 Outputs are written to:
 
 ```text
-outputs/rnn_weather_paper_lstm/
+outputs/weather_lstm/
 ```
 
 ## Notebook
@@ -106,6 +106,6 @@ It runs the complete workflow:
 
 1. Load and inspect data
 2. Build sequence dataloaders
-3. Train the Paper-LSTM
+3. Train the WeatherLSTM
 4. Compare against Persistence
 5. Plot training loss and predictions
