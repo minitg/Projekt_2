@@ -11,7 +11,9 @@ import time
 
 import numpy as np
 import pandas as pd
+import torch
 
+from benchmark_timing import clock
 from classification_data import file_sha256, load_classification_bundle
 from evaluate_precipitation_baselines import probability_metrics
 from foundation_classifiers import (
@@ -60,25 +62,31 @@ def extract_split_features(data, backend, horizon: int, split: str, *, cache_dir
             if saved["identity"].item() != key or saved["case_ids"].tolist() != cases.case_id.tolist():
                 raise ValueError("forecast cache belongs to different cases or model settings")
             x = saved["features"].copy()
+            seconds = float(saved["seconds"])
         if x.shape != (len(cases), len(FEATURE_NAMES)) or not np.isfinite(x).all():
             raise ValueError("invalid forecast feature cache; regenerate with --refresh-features")
         print(f"{backend.name} h={horizon} {split}: loaded {len(cases)} cached forecasts", flush=True)
-        return x, cases, cache
+        return x, cases, cache, seconds
 
     iterator = replace(data, cases=cases).foundation_records(horizon, split)
     chunks = []
     consumed_ids = []
+    seconds = 0.0
     start = time.monotonic()
     while batch := list(islice(iterator, batch_size)):
+        # Time only the forecaster, not record preparation, so models share one definition.
+        tick = clock()
         chunks.append(forecast_features(backend, batch))
+        seconds += clock() - tick
         consumed_ids.extend(record["case_id"] for record in batch)
         if len(chunks) == 1 or len(chunks) % 20 == 0 or len(consumed_ids) == len(cases):
             print(f"{backend.name} h={horizon} {split}: {len(consumed_ids)}/{len(cases)} ({time.monotonic() - start:.1f}s)", flush=True)
     if consumed_ids != cases.case_id.tolist():
         raise ValueError("forecast case order differs from the classification dataset")
     x = np.concatenate(chunks)
-    np.savez_compressed(cache, identity=np.array(key), case_ids=cases.case_id.to_numpy(dtype=str), features=x)
-    return x, cases, cache
+    np.savez_compressed(cache, identity=np.array(key), case_ids=cases.case_id.to_numpy(dtype=str),
+                        features=x, seconds=np.array(seconds))
+    return x, cases, cache, seconds
 
 
 def aligned_labels(data, cases) -> np.ndarray:
@@ -111,13 +119,15 @@ def train_and_evaluate(data, backend, output_dir: Path, *, dataset_fingerprint: 
     for horizon in horizons:
         directory = output_dir / f"h{horizon:02d}"
         directory.mkdir(parents=True, exist_ok=True)
-        train_x, train_cases, train_cache = extract_split_features(
+        train_x, train_cases, train_cache, train_seconds = extract_split_features(
             data, backend, horizon, "train", cache_dir=output_dir / "feature_cache",
             dataset_fingerprint=dataset_fingerprint, batch_size=batch_size,
             max_cases=max_cases, refresh=refresh,
         )
         train_y = aligned_labels(data, train_cases)
+        tick = clock()
         head = ClassProbabilityHead.fit(train_x, train_y, train_cases, regularization_c=regularization_c)
+        head_fit_seconds = clock() - tick
         head.save(directory / "classifier.json")
         # Verify that the persisted classifier is the one used for evaluation.
         head = ClassProbabilityHead.load(directory / "classifier.json")
@@ -127,12 +137,14 @@ def train_and_evaluate(data, backend, output_dir: Path, *, dataset_fingerprint: 
         run_rows = []
         feature_caches = {"train": str(train_cache)}
         for split in ("validation", "evaluation"):
-            x, cases, cache = extract_split_features(
+            x, cases, cache, seconds = extract_split_features(
                 data, backend, horizon, split, cache_dir=output_dir / "feature_cache",
                 dataset_fingerprint=dataset_fingerprint, batch_size=batch_size,
                 max_cases=max_cases, refresh=refresh,
             )
+            tick = clock()
             p = head.predict_proba(x)
+            predict_seconds = clock() - tick
             y = aligned_labels(data, cases)
             # Evaluation labels have not entered the head or its scaler.
             if file_sha256(directory / "classifier.json") != fitted_head_sha256:
@@ -145,6 +157,11 @@ def train_and_evaluate(data, backend, output_dir: Path, *, dataset_fingerprint: 
                 "brier_skill_vs_training_frequency": 1 - metrics["brier_multiclass"] / reference["brier_multiclass"],
                 "training_frequency_brier": reference["brier_multiclass"],
                 "subset_run": max_cases is not None,
+                # Seconds come from the run that created the feature cache.
+                "encode_seconds": seconds,
+                "inference_ms_per_case": 1000 * (seconds + predict_seconds) / len(y),
+                "head_fit_seconds": head_fit_seconds, "device": backend.metadata["device"],
+                "torch_threads": torch.get_num_threads(), "batch_size": batch_size,
             })
             run_rows.append(metrics)
             frame = cases.copy()

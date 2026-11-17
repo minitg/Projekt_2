@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn.functional as F
+from benchmark_timing import clock
 from classification_data import load_classification_bundle, file_sha256
 from evaluate_precipitation_baselines import probability_metrics
 
@@ -80,37 +81,49 @@ def run(data_dir, output_dir, encoder, horizon=3, batch_size=8, max_cases=None):
     data = load_classification_bundle(data_dir)
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    splits = {}
+    splits, encode_seconds = {}, {}
     for split in ('train', 'validation', 'evaluation'):
         x, y, cases = data.arrays(horizon, split)
         if max_cases is not None and len(x) > max_cases:
             indices = np.linspace(0, len(x)-1, max_cases).round().astype(int)
             x, y, cases = x[indices], y[indices], cases.iloc[indices].reset_index(drop=True)
+        start = clock()
         splits[split] = (encoder.transform(x, batch_size), y, cases)
+        encode_seconds[split] = clock() - start
     x, y, _ = splits['train']
     if set(y) != {0, 1, 2}:
         raise ValueError('training subset must include all three classes; increase max_cases')
+    start = clock()
     head = LogisticRegression(C=1., max_iter=2000, random_state=0).fit(x, y)
+    head_fit_seconds = clock() - start
     if head.n_iter_.max() >= head.max_iter:
         raise RuntimeError('classification head did not converge')
     np.savez_compressed(output / 'head.npz', coefficients=head.coef_, intercept=head.intercept_, classes=head.classes_)
     rows = []
     for split in ('validation', 'evaluation'):
         x, y, cases = splits[split]
+        start = clock()
         p = head.predict_proba(x)
+        predict_seconds = clock() - start
         prediction = cases.copy()
         prediction['target_class'] = y
         prediction[['p_class0', 'p_class1', 'p_class2']] = p
         prediction.to_parquet(output / f'{split}_predictions.parquet', index=False)
         matrix = confusion_matrix(y, p.argmax(1), labels=[0, 1, 2])
         np.savetxt(output / f'{split}_confusion.csv', matrix, delimiter=',', fmt='%d')
-        rows.append({'model': 'TiViT-CLIP-B32', 'horizon_h': horizon, 'split': split, **probability_metrics(y, p)})
+        # Inference per case = frozen-encoder embedding + head; excludes data loading and model load.
+        rows.append({'model': 'TiViT-CLIP-B32', 'horizon_h': horizon, 'split': split, **probability_metrics(y, p),
+                     'encode_seconds': encode_seconds[split],
+                     'inference_ms_per_case': 1000 * (encode_seconds[split] + predict_seconds) / len(y),
+                     'head_fit_seconds': head_fit_seconds, 'device': str(encoder.device),
+                     'torch_threads': torch.get_num_threads(), 'batch_size': batch_size})
     scores = pd.DataFrame(rows)
     scores.to_csv(output / 'scores.csv', index=False)
     (output / 'run.json').write_text(json.dumps({
         'encoder': encoder.metadata, 'dataset_manifest_sha256': file_sha256(Path(data_dir) / 'manifest.json'),
         'code_sha256': file_sha256(Path(__file__)), 'features': data.features.columns.tolist(),
         'horizon_h': horizon, 'classes': [0, 1, 2], 'max_cases_per_split': max_cases,
+        'timing_seconds': {'encode': encode_seconds, 'head_fit': head_fit_seconds, 'fine_tuning': 0.0},
         'fit': 'train only; C=1; natural class frequencies; no tuning on evaluation',
         'case_selection': 'all eligible cases' if max_cases is None else 'evenly spaced label-independent technical subset; not full benchmark',
         'evaluation': 'retrospective 2024; previously explored; not untouched test',
