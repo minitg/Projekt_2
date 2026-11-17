@@ -1,0 +1,9 @@
+# Dependencies for the HF CLIP TiViT adaptation (no Timestral installation needed).
+numpy>=1.24
+pandas>=2.2
+pyarrow>=16
+scikit-learn>=1.5
+torch>=2.7
+transformers>=4.45,<6
+matplotlib>=3.8
+Pillow>=10

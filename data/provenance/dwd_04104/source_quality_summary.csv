@@ -1,0 +1,11 @@
+parameter,quality_level,hours
+TT_TU,3,87672
+RF_TU,3,87672
+R1,3,85502
+R1,1,2040
+R1,missing,130
+SD_SO,10,65190
+SD_SO,missing,22482
+F,10,87489
+F,missing,183
+P0,3,87672

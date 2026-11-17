@@ -1,5 +1,7 @@
 .DS_Store
 .venv/
+.venv-foundation/
+.cache/foundation_models/
 __pycache__/
 *.py[cod]
 
@@ -16,3 +18,9 @@ outputs/
 .ipynb_checkpoints/
 .matplotlib_cache/
 notebooks/.matplotlib_cache/
+
+# Rebuildable, audited precipitation dataset.
+data/processed/precipitation_v1/
+data/processed/precipitation_v2/
+data/processed/precipitation_classification_v1/
+data/raw_audit/

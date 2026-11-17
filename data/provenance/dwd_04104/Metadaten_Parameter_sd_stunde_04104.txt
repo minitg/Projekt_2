@@ -1,0 +1,20 @@
+Stations_ID;Von_Datum;Bis_Datum;Stationsname;Parameter;Parameterbeschreibung;Einheit;Datenquelle (Strukturversion=SV);Zusatz-Info;Besonderheiten;Literaturhinweis;eor;
+4104;19510101;19940331;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;19940401;19970630;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) von automatischen Stationen der 1. Generation (MIRIAM/AFMS2, ESAU-Daten);Stundenwerte in WOZ;;;eor;
+4104;19970701;19970731;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;19970801;19980228;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) von automatischen Stationen der 1. Generation (MIRIAM/AFMS2, ESAU-Daten);Stundenwerte in WOZ;;;eor;
+4104;19980301;19980331;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;19980401;19981031;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) von automatischen Stationen der 1. Generation (MIRIAM/AFMS2, ESAU-Daten);Stundenwerte in WOZ;;;eor;
+4104;19981101;19981130;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;19981201;19990131;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) von automatischen Stationen der 1. Generation (MIRIAM/AFMS2, ESAU-Daten);Stundenwerte in WOZ;;;eor;
+4104;19990201;19990228;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;19990301;19990430;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) von automatischen Stationen der 1. Generation (MIRIAM/AFMS2, ESAU-Daten);Stundenwerte in WOZ;;;eor;
+4104;19990501;19990531;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;19990601;20010331;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) von automatischen Stationen der 1. Generation (MIRIAM/AFMS2, ESAU-Daten);Stundenwerte in WOZ;;;eor;
+4104;20010401;20021130;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) generiert aus stündlichen SYNOP-Meldungen (nach 01.04.2001);Stundenwerte in UTC;;;eor;
+4104;20021201;20021231;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;20030101;20060831;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) generiert aus stündlichen SYNOP-Meldungen (nach 01.04.2001);Stundenwerte in UTC;;;eor;
+4104;20061001;20061031;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) aus analogen Registrierungen (Campbell-Stokes);Stundenwerte in WOZ;;;eor;
+4104;20061114;20250514;Regensburg;SD_SO;stdl. Sonnenscheindauer;;Daten der Sonnenscheindauer (Stundensummen) generiert aus stündlichen SYNOP-Meldungen (nach 01.04.2001);Stundenwerte in UTC;;;eor;
+Legende: FT  = Folgetag; GZ = Gesetzliche Zeit
+generiert: 15.05.2025 --  Deutscher Wetterdienst  --

@@ -1,0 +1,272 @@
+{
+  "station_id": "04104",
+  "station_name": "Regensburg",
+  "timezone": "UTC",
+  "timezone_verified": true,
+  "verified_reference_start": "2015-01-01 00:00:00",
+  "verified_reference_end": "2024-12-31 23:00:00",
+  "source_csv_sha256": "2347e56fc2c39671ae8c2e176177b8ae58d1560c87241b5bb1a8a633b4090af7",
+  "source_comparison": [
+    {
+      "parameter": "TT_TU",
+      "rows": 87672,
+      "known_compared": 87518,
+      "value_mismatches": 0,
+      "missing_mask_mismatches": 0
+    },
+    {
+      "parameter": "RF_TU",
+      "rows": 87672,
+      "known_compared": 87510,
+      "value_mismatches": 0,
+      "missing_mask_mismatches": 0
+    },
+    {
+      "parameter": "R1",
+      "rows": 87672,
+      "known_compared": 87541,
+      "value_mismatches": 0,
+      "missing_mask_mismatches": 0
+    },
+    {
+      "parameter": "SD_SO",
+      "rows": 87672,
+      "known_compared": 65188,
+      "value_mismatches": 0,
+      "missing_mask_mismatches": 0
+    },
+    {
+      "parameter": "F",
+      "rows": 87672,
+      "known_compared": 87474,
+      "value_mismatches": 0,
+      "missing_mask_mismatches": 0
+    },
+    {
+      "parameter": "P0",
+      "rows": 87672,
+      "known_compared": 87622,
+      "value_mismatches": 0,
+      "missing_mask_mismatches": 0
+    }
+  ],
+  "metadata": [
+    {
+      "file": "Metadaten_Parameter_tu_stunde_04104.txt",
+      "sha256": "811b53b245dbcfa90f94e5972a0fd9d4039c3dbcfe867effc05c5dfa1920a99a",
+      "verified_rows": [
+        {
+          "parameter": "RF_TU",
+          "begin": "2004-01-01 00:00:00",
+          "end_exclusive": "2025-05-15 00:00:00",
+          "time_description": "Stundenwerte in UTC",
+          "source": "Daten der Temperatur und relativen Feuchte (Stundenwerte) generiert aus SYNOP-Meldungen (nach dem 01.04.2001)"
+        },
+        {
+          "parameter": "TT_TU",
+          "begin": "2004-01-01 00:00:00",
+          "end_exclusive": "2025-05-15 00:00:00",
+          "time_description": "Stundenwerte in UTC",
+          "source": "Daten der Temperatur und relativen Feuchte (Stundenwerte) generiert aus SYNOP-Meldungen (nach dem 01.04.2001)"
+        }
+      ]
+    },
+    {
+      "file": "Metadaten_Parameter_rr_stunde_04104.txt",
+      "sha256": "7ecb58d4f4c3aac7acf375604e986d338b71f83382e58f0e6c96843fd26e0e50",
+      "verified_rows": [
+        {
+          "parameter": "R1",
+          "begin": "2001-04-01 00:00:00",
+          "end_exclusive": "2025-05-16 00:00:00",
+          "time_description": "in UTC",
+          "source": "Daten aus SYNOP-Meldungen (FM 12 ab 01.04.2001 mit neuen nationalen Schlüsselgruppen)"
+        }
+      ]
+    },
+    {
+      "file": "Metadaten_Parameter_sd_stunde_04104.txt",
+      "sha256": "1d0b29239483ecc49cbc6bc90a30da1ca1688da8a77b363be6ea8076cd08c4e8",
+      "verified_rows": [
+        {
+          "parameter": "SD_SO",
+          "begin": "2006-11-14 00:00:00",
+          "end_exclusive": "2025-05-15 00:00:00",
+          "time_description": "Stundenwerte in UTC",
+          "source": "Daten der Sonnenscheindauer (Stundensummen) generiert aus stündlichen SYNOP-Meldungen (nach 01.04.2001)"
+        }
+      ]
+    },
+    {
+      "file": "Metadaten_Parameter_ff_stunde_04104.txt",
+      "sha256": "47fae62f63a50dc373a6abde65d194f39c657f6781abb6b5a56ae5a4af0b68ac",
+      "verified_rows": [
+        {
+          "parameter": "F",
+          "begin": "2003-09-01 00:00:00",
+          "end_exclusive": "2025-05-15 00:00:00",
+          "time_description": "Stundenwerte in UTC",
+          "source": "Winddaten (Stundenmittel, maximale Windspitze 23:51-23:50 UTC) generiert aus 10-Minutenmittel von automatischen Stationen der 2. Generation (AMDA), Richtungsangaben in 36-teiliger Windrose"
+        }
+      ]
+    },
+    {
+      "file": "Metadaten_Parameter_p0_stunde_04104.txt",
+      "sha256": "2ba7def9aa3b73f28c4b380c2f1b8eeebc62db1fd20eacb49e2b6189856aeac1",
+      "verified_rows": [
+        {
+          "parameter": "P0",
+          "begin": "2001-04-01 00:00:00",
+          "end_exclusive": "2025-05-15 00:00:00",
+          "time_description": "in UTC",
+          "source": "Daten aus SYNOP-Meldungen (FM 12 ab 01.04.2001 mit neuen nationalen Schlüsselgruppen)"
+        }
+      ]
+    }
+  ],
+  "original_products": [
+    {
+      "file": "/Users/thomasgaillinger/Documents/Master/Projekt_1/XAI_Wetter/stundenwerte_TU_04104_19480101_20241231_hist/produkt_tu_stunde_19480101_20241231_04104.txt",
+      "sha256": "46f5fbe4bde6fcad0c98f0c986034e1b30c87ad78f3dbfee8035268ed504e446"
+    },
+    {
+      "file": "/Users/thomasgaillinger/Documents/Master/Projekt_1/XAI_Wetter/stundenwerte_RR_04104_19950901_20241231_hist/produkt_rr_stunde_19950901_20241231_04104.txt",
+      "sha256": "d61390a55a2eeef83cb6a136c1c481eba3a37d75ad997fe5e6364d0b4af04572"
+    },
+    {
+      "file": "/Users/thomasgaillinger/Documents/Master/Projekt_1/XAI_Wetter/stundenwerte_SD_04104_19510101_20241231_hist/produkt_sd_stunde_19510101_20241231_04104.txt",
+      "sha256": "59cf7561b9fc0e166c9600505f6cb2049974e4ed3fb46e4fac6316e0196f9f18"
+    },
+    {
+      "file": "/Users/thomasgaillinger/Documents/Master/Projekt_1/XAI_Wetter/stundenwerte_FF_04104_19490101_20241231_hist/produkt_ff_stunde_19490101_20241231_04104.txt",
+      "sha256": "30cc5670319f41f107949d4fe57c7b1cbcd0d186dfe9ba71166cfd18eafd1a0f"
+    },
+    {
+      "file": "/Users/thomasgaillinger/Documents/Master/Projekt_1/XAI_Wetter/stundenwerte_P0_04104_19490101_20241231_hist/produkt_p0_stunde_19490101_20241231_04104.txt",
+      "sha256": "c7c085eee0735c00fa45376f8653890c2da0ade744580452a1b9c77b6cc2d3ac"
+    }
+  ],
+  "ten_minute_archives": [
+    {
+      "file": "10minutenwerte_nieder_04104_20100101_20191231_hist.zip",
+      "cached_file": "data/raw_audit/10minutenwerte_nieder_04104_20100101_20191231_hist.zip",
+      "sha256": "35ba32a1bbf0aba0b4f3a1ec545e907104590bd9f1cb1c2dcdf246ce177e57e1",
+      "product": "produkt_zehn_min_rr_20100101_20191231_04104.txt",
+      "url": "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/precipitation/historical/10minutenwerte_nieder_04104_20100101_20191231_hist.zip"
+    },
+    {
+      "file": "10minutenwerte_nieder_04104_20200101_20251231_hist.zip",
+      "cached_file": "data/raw_audit/10minutenwerte_nieder_04104_20200101_20251231_hist.zip",
+      "sha256": "0790fdbb710e03e158cff7d785dd00c69c7528106f7cd76177f8ed83c4bc8224",
+      "product": "produkt_zehn_min_rr_20200101_20251231_04104.txt",
+      "url": "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/precipitation/historical/10minutenwerte_nieder_04104_20200101_20251231_hist.zip"
+    }
+  ],
+  "interval_evidence_by_year": [
+    {
+      "year": 2015,
+      "end_offset_minutes": -10,
+      "n_common": 8641,
+      "mae_mm": 0.0023955560698993177,
+      "exact_fraction": 0.9760444393010068,
+      "wet_n": 792,
+      "wet_mae_mm": 0.02613636363636364
+    },
+    {
+      "year": 2016,
+      "end_offset_minutes": -10,
+      "n_common": 8784,
+      "mae_mm": 0.00299408014571949,
+      "exact_fraction": 0.9700591985428051,
+      "wet_n": 1010,
+      "wet_mae_mm": 0.026039603960396042
+    },
+    {
+      "year": 2017,
+      "end_offset_minutes": -10,
+      "n_common": 8736,
+      "mae_mm": 0.0028388278388278387,
+      "exact_fraction": 0.9716117216117216,
+      "wet_n": 938,
+      "wet_mae_mm": 0.02643923240938166
+    },
+    {
+      "year": 2018,
+      "end_offset_minutes": -10,
+      "n_common": 8756,
+      "mae_mm": 0.002455459113750571,
+      "exact_fraction": 0.9754454088624943,
+      "wet_n": 782,
+      "wet_mae_mm": 0.027493606138107418
+    },
+    {
+      "year": 2019,
+      "end_offset_minutes": -10,
+      "n_common": 8760,
+      "mae_mm": 0.0020890410958904113,
+      "exact_fraction": 0.9791095890410959,
+      "wet_n": 846,
+      "wet_mae_mm": 0.02163120567375887
+    },
+    {
+      "year": 2020,
+      "end_offset_minutes": -10,
+      "n_common": 8781,
+      "mae_mm": 0.0027673385719166384,
+      "exact_fraction": 0.9723266142808337,
+      "wet_n": 884,
+      "wet_mae_mm": 0.027488687782805426
+    },
+    {
+      "year": 2021,
+      "end_offset_minutes": -10,
+      "n_common": 8753,
+      "mae_mm": 0.0029475608362847026,
+      "exact_fraction": 0.970524391637153,
+      "wet_n": 983,
+      "wet_mae_mm": 0.026246185147507626
+    },
+    {
+      "year": 2022,
+      "end_offset_minutes": -10,
+      "n_common": 8729,
+      "mae_mm": 0.0023484935273227173,
+      "exact_fraction": 0.9765150647267729,
+      "wet_n": 824,
+      "wet_mae_mm": 0.02487864077669903
+    },
+    {
+      "year": 2023,
+      "end_offset_minutes": -10,
+      "n_common": 8760,
+      "mae_mm": 0.00295662100456621,
+      "exact_fraction": 0.9704337899543379,
+      "wet_n": 1049,
+      "wet_mae_mm": 0.024690181124880837
+    },
+    {
+      "year": 2024,
+      "end_offset_minutes": -10,
+      "n_common": 8784,
+      "mae_mm": 0.0028233151183970854,
+      "exact_fraction": 0.9717668488160291,
+      "wet_n": 987,
+      "wet_mae_mm": 0.025126646403242144
+    }
+  ],
+  "r1_reference_to_interval_end_minutes": -10,
+  "interval_evidence_status": "empirical comparison with primary DWD 10-minute data; not a formal minute-level guarantee",
+  "recommended_primary_start": "2018-01-01",
+  "primary_start_reason": "rain[e]H3 installed 2017-11-14; use complete years with one precipitation instrument generation",
+  "previous_instrument": "PLUVIO through 2017-11-13; DWD describes approximately 5 additional minutes of response lag",
+  "hourly_recent_publication": "daily, rolling 500 days through yesterday, according to DWD documentation",
+  "hourly_historical_publication": "annually updated, quality-checked historical version",
+  "one_hour_availability_verified": false,
+  "point_in_time_versions_available": false,
+  "study_mode": "retrospective finalized-data benchmark under explicitly hypothetical observation delays",
+  "official_sources": [
+    "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/precipitation/DESCRIPTION_obsgermany_climate_hourly_precipitation_en.pdf",
+    "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/precipitation/BESCHREIBUNG_obsgermany-climate-10min-precipitation_de.pdf"
+  ],
+  "audit_code_sha256": "acc124a17f376330043095c80d8becfeeb935cb5e06562bf0b5f18e45dc1b5c9"
+}

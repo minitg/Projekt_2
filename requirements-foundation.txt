@@ -1,0 +1,9 @@
+# Optional local inference and supervised three-class adapters (Python >=3.10).
+numpy>=1.24
+pandas>=2.2
+pyarrow>=16
+scikit-learn==1.8.0
+torch==2.15.0
+transformers==5.22.1
+chronos-forecasting==2.3.2
+timestral @ git+https://github.com/mistralai/timestral.git@a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff

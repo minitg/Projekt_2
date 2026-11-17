@@ -1,0 +1,7 @@
+parameter,rows,known_compared,value_mismatches,missing_mask_mismatches
+TT_TU,87672,87518,0,0
+RF_TU,87672,87510,0,0
+R1,87672,87541,0,0
+SD_SO,87672,65188,0,0
+F,87672,87474,0,0
+P0,87672,87622,0,0
