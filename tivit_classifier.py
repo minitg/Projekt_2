@@ -32,10 +32,14 @@ def time_images(x, segment=7, stride=1, size=224):
 
 
 class TiViTEncoder:
-    def __init__(self, model_id='openai/clip-vit-base-patch32', layer=6, device='cpu', revision=None):
+    def __init__(self, model_id=None, layer=6, device='cpu', revision=None):
         from transformers import CLIPImageProcessor, CLIPVisionModel
-        self.processor = CLIPImageProcessor.from_pretrained(model_id, revision=revision)
-        self.model = CLIPVisionModel.from_pretrained(model_id, revision=revision).to(device).eval()
+        if model_id is None:
+            model_id = str(Path(__file__).resolve().parent / 'models/clip-vit-base-patch32')
+        local = Path(model_id).is_dir()
+        self.processor = CLIPImageProcessor.from_pretrained(model_id, revision=revision, local_files_only=local)
+        self.model = CLIPVisionModel.from_pretrained(model_id, revision=revision,
+                                                     local_files_only=local, use_safetensors=True).to(device).eval()
         self.model.requires_grad_(False)
         if not 1 <= layer <= self.model.config.num_hidden_layers:
             raise ValueError('layer outside vision transformer depth')

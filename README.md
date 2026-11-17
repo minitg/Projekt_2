@@ -248,3 +248,7 @@ encoded separately; only the logistic classification head is trained.
 Outputs include probabilities with case IDs, metrics, confusion matrices and
 run metadata. `MAX_CASES=None` uses all eligible cases; subsets are technical
 checks and must not be mixed with full benchmark scores.
+
+The bundled [CLIP checkpoint](models/clip-vit-base-patch32/README.md) includes
+configs, converted Safetensors weights via Git LFS, provenance and a security review.
+Run `git lfs pull` after cloning to fetch the weights.
